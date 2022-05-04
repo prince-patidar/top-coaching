@@ -1,0 +1,28 @@
+<div class='container d-flex flex-column ps-4 pe-4  profile'>
+  <% if current_user.profile && current_user.profile.avatar.url %>
+    <%= image_tag(current_user.profile.avatar.url, :width => 200, :height => 200, class: 'img', alt: 'Image')%>
+  <% else %>
+    <img src='https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg' alt='Girl in a jacket' width='200' height='200' class: 'img'>
+    <h5 class="mt-4">Hi User, update your Profile</h5>
+  <% end %>
+  <% if current_user.profile %>
+    <h4 class='text-uppercase mb-1'>Hi, <%= current_user.profile.name %> </h4>
+  <% end %>
+  <% if current_user.profile %>
+    <a class='btn btn-primary py-1 px-0 px-lg-1 rounded' href="/profiles/<%= current_user.id %>/edit">Edit Profile</a>
+  <% else %>
+    <%= link_to 'Create Profile', new_profile_path, class: 'btn btn-primary py-1 px-0 px-lg-1 rounded' %>
+  <% end %>
+  <div class='divider-custom divider-light'>
+    <div class='divider-custom-line'></div>
+    <div class='divider-custom-icon'><i class='fas fa-star'></i></div>
+    <div class='divider-custom-line'></div>
+  </div>
+    <%= render 'profiles/profile' %>
+    <% if current_user.teacher? %>
+      <%= render 'profiles/teacher' %>
+    <% else %>
+      <%= render 'profiles/student' %>
+    <% end %>
+</div>
+

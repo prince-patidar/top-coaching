@@ -1,0 +1,12 @@
+<h2 class='heading-before-table'><%= @filter_class %> Students </h2>
+<form action="/students" method="GET" class='teacher-students-form'>
+  <select name="filter_option" onchange="this.form.submit()" class='select-class'>
+    <option value="">Select a Class</option>
+    <option class='heading-color' value="All">All</option>
+    <% current_user.grades.each do |c| %>
+      <option class='heading-color' value="<%= c.class_name %>"><%= c.class_name %></option>
+    <% end %>
+  </select>
+</form>
+<br>
+<%= render 'student', students: current_user.all_students(@filter_class) %>

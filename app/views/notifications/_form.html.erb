@@ -1,0 +1,26 @@
+<div class='profile-form profile-form-m'>
+  <h2><%= notification_data[:status] %></h2>
+  <%= form_with model: notification_data[:notification] do |form| %>  
+    <%= form.hidden_field :creator, :value => "#{current_user.email}" %>
+    <%= form.hidden_field :notification_for_role, :value => "student" %>
+    <div class="field form-group">
+      <%= form.label :title %><br>
+      <%= form.text_area :title, class: 'form-control', required: true  %>
+    </div>
+    <div class="field form-group">
+      <%= form.label :message %><br>
+      <%= form.text_area :message, class: 'form-control', required: true  %>
+    </div>
+    <div>
+      <%= form.label 'For a single User' %><br>
+      <%= form.select :notification_for_user, current_user.all_student.map { |u| [u.email, u.id]}, {prompt: 'Please select user'}, class: "grade-material-form-select mb-4"  %>
+    </div>
+    <div>
+      <%= form.label 'For all student of a class' %><br>
+      <%= form.select :notification_for_grade, current_user.grades.map { |t| [t.class_name, t.id]}, {prompt: 'Please select class'}, class: "grade-material-form-select" %>
+    </div>
+    <div class="actions">
+      <%= form.submit "#{notification_data[:status]}", class:'form-control btn btn-primary mt-2 mb-2' %>
+    </div>
+  <% end %>
+</div>

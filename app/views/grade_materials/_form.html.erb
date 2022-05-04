@@ -1,0 +1,24 @@
+<div class='grade_material-form'>
+  <h2><%= grade_material_data[:status] %></h2>
+  <%= form_with model: grade_material_data[:grade_material] do |form| %>  
+    <div class='field form-group'>
+      <%= form.label :Title %><br>
+      <%= form.text_field :title, class: 'form-control', required: true %>
+    </div><br>
+    <div class='field form-group'>
+      <%= form.label :content %><br>
+      <%= form.rich_text_area :content, class: 'form-control mb-2 rich-text-input', required: true %> 
+    </div>
+    <div>
+      <%= form.label 'Select Class' %><br>
+      <%= form.select :grade_id, current_user.grades.map { |t| [t.class_name, t.id]}, {}, class: "grade-material-form-select", required: true  %>
+    </div>
+    <%= form.hidden_field :subject_name, :value => "#{current_user.subject.subject_name}" %>
+    <div class="actions">
+      <%= form.submit "#{grade_material_data[:status]}", class:'form-control btn btn-primary mt-3 mb-2' %>
+    </div>
+    <% grade_material_data[:grade_material].errors.full_messages.each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  <% end %>
+</div>

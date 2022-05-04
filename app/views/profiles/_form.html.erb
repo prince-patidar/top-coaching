@@ -1,0 +1,28 @@
+<div class='profile-form profile-form-m'>
+  <h2><%= profile_data[:status] %></h2>
+  <%= form_with model: profile_data[:profile] do |form| %>  
+    <div class="field form-group">
+      <%= form.label :name %><br>
+      <%= form.text_field :name, class: 'form-control', required: true %>
+    </div>
+    <div class="field form-group">
+      <%= form.label :father_name %><br>
+      <%= form.text_field :father_name, class: 'form-control', required: true  %>
+    </div>
+    <div class="field form-group">
+      <%= form.label :dob %><br>
+      <%= form.date_field :dob, class: 'form-control', required: true  %>
+    </div>
+    <div class="field form-group">
+      <%= form.label :age %><br>
+      <%= form.number_field :age, class: 'form-control', required: true  %>
+    </div>
+    <div class='mt-2 mb-2 field form-group'>
+      <%= form.label :avatar %>
+      <%= form.file_field :avatar, class: 'form-control', required: true  %>
+    </div>
+    <div class="actions">
+      <%= form.submit "#{profile_data[:status]}", class:'form-control btn btn-primary mt-2 mb-2' %>
+    </div>
+  <% end %>
+</div>

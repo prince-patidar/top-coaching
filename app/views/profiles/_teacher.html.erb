@@ -1,0 +1,4 @@
+<p class='masthead-subheading font-weight-light mb-2'>Role :- Teacher</p>
+<p class='masthead-subheading font-weight-light mb-2'>Teaching Subject :-  <%= current_user.subject.subject_name %> </p>
+<p class='masthead-subheading font-weight-light mb-0'>Teaching in Classes :- </p>
+<p class='masthead-subheading font-weight-light mb-2'><%= current_user.classes.join(" , ") %></p>

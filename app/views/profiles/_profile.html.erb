@@ -1,0 +1,5 @@
+<% if current_user.profile %>
+  <p class='masthead-subheading font-weight-light mb-2'>Father Name:-  <%= current_user.profile.father_name %> </p>
+  <p class='masthead-subheading font-weight-light mb-2'>DOB:-  <%= current_user.profile.dob %> </p>
+  <p class='masthead-subheading font-weight-light mb-2'>Age:-  <%= current_user.profile.age%> </p>
+<% end %>
