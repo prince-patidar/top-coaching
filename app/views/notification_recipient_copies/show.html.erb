@@ -1,0 +1,6 @@
+<div class='notification-show-box'>
+  <h4>Creator:- <%= @notification.creator %></h4>
+  <h5>Title:- <%= @notification.title %></h5>
+  <h5>Message:- <%= @notification.message %></h5>
+  <% notification_recipient_copy = current_user.notification_recipient_copies.find_by(notification_id: @notification.id).status %>
+</div>

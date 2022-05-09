@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi user, <%= @user_detail[:student].email %>!</p>
+    <p>
+    Course details<br>
+    --------------------------
+    </p>
+    <p>Email: <%= @user_detail[:student].email %></p>
+    <p>
+    Message:<br>
+    ----------
+    </p>
+    <p>New Course Material '<%= @user_detail[:course_name] %>' is uploaded by '<%= @user_detail[:teacher].email %>' .!!.</p>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<h2 class='heading-before-table'>All Teachers</h2>
+<div class='container mt-3 me-5'>
+  <% row_number = 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Teacher</th>
+        <th scope="col">Subject</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.all_teachers.each do |user| %>
+        <tr>
+          <th scope="row"><%= row_number += 1 %></th>
+          <td><%= user.email %></td>
+          <td><%= user.subject.subject_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

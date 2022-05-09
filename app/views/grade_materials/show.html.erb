@@ -1,0 +1,14 @@
+<% cache([current_user, @grade_material]) do %>
+  <div class='show-material'>
+    <h4>Title:- <%= @grade_material.title %></h4>
+    <h6>Subject:- <%= @grade_material.subject_name %></h6>
+    <h6>Class:- <%= @grade_material.grade.class_name%></h6>
+    <% if current_user.has_role? :student %>
+      <h6>Teacher Name:- <%= @grade_material.user.profile.name %></h6>
+    <% end %>
+  </div>
+  <div  class='rich-text'>
+    <h4 class='heading-color'>Course Content</h4>
+    <%= @grade_material.content %>
+  </div>
+<% end %>

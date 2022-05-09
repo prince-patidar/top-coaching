@@ -1,0 +1,58 @@
+<nav class='navbar navbar-expand-lg bg-secondary text-uppercase fixed-top' id='mainNav'>
+  <div class='container'>
+    <% if user_signed_in? %>
+      <%= link_to 'Top-Coaching', root_path, class:'navbar-brand' %>
+    <% else %>
+      <a class='navbar-brand' href='/'>Top-Coaching</a>
+    <% end %>
+    <button class='navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded' type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
+      Menu
+      <i class='fas fa-bars'></i>
+    </button>
+    <div class='collapse navbar-collapse' id='navbarResponsive'>
+      <ul class='navbar-nav ms-auto'>
+      <% if user_signed_in? %>
+
+        <div class="dropdown nav-item mx-0 mx-lg-1 mt-3">
+          <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="badge badge-danger ml-2" id="unread_notification_counts<%= current_user.id %>"><%= current_user.unread_notifications%></span>
+            <i class="fas fa-bell notification-bell"></i>
+          </a>
+          <ul class="dropdown-menu avbar-nav ml-auto nav-flex-icons notification-box" aria-labelledby="dropdownMenuButton1">
+            <li class='notification-heading'>All Notifications</li>
+            <div class='notification-content' id="unread_notifications<%= current_user.id %>">
+              <% current_user.notifications.each do |notification| %>
+                <% if notification.status == 'unread' %>
+                <li class='dropdown-item'>
+                  <%= link_to notification.notification.title, notification_recipient_copy_path(notification.notification), class: 'dropdown-item-text waves-effect waves-light unread' %>
+                  <a href="/notification_recipient_copies/<%= notification.id %>" data-method="delete" ><i class="fas fa-solid fa-trash delete-notification"></i></a>
+                </li>
+                <% else %>
+                  <li class='dropdown-item'>
+                    <%= link_to notification.notification.title, notification_recipient_copy_path(notification.notification), class: 'dropdown-item-text waves-effect waves-light read' %>
+                    <a href="/notification_recipient_copies/<%= notification.id %>" data-method="delete" ><i class="fas fa-solid fa-trash delete-notification"></i></a>
+                  </li>
+                <% end %>
+              <% end %>
+            </div>
+            <%  if current_user.teacher? %>
+              <li><%= link_to 'Notify Student', new_notification_path, class: 'btn btn-primary dropdown-item waves-effect waves-light dropdown-item-bottom' %></li>
+              <li><%= link_to 'Your Created Notifications', notifications_path, class: 'btn btn-secondary dropdown-item waves-effect waves-light dropdown-item-bottomm' %></li>
+            <% end %>
+          </ul>
+        </div>
+        
+        <%  if current_user.teacher? %>
+          <li class='nav-item mx-0 mx-lg-1'><%= link_to 'Students', students_path, class: 'nav-link py-3 px-0 px-lg-3 rounded' %></li>
+        <% else %>
+          <li class='nav-item mx-0 mx-lg-1'><%= link_to 'Teachers',teachers_path, class: 'nav-link py-3 px-0 px-lg-3 rounded' %></li>
+        <% end %>
+        <li class='nav-item mx-0 mx-lg-1'><%= link_to 'Study Material', grade_materials_path, class: 'nav-link py-3 px-0 px-lg-3 rounded' %></li>
+        <li class='nav-item mx-0 mx-lg-1'><%= link_to 'LogOut', destroy_user_session_path, class: 'nav-link py-3 px-0 px-lg-3 rounded',  :confirm => 'Are you sure?', :method => :delete %></li>
+      <% else %>
+        <li class='nav-item mx-0 mx-lg-1'><%= link_to 'LogIn', new_user_session_path, class: 'nav-link py-3 px-0 px-lg-3 rounded' %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
